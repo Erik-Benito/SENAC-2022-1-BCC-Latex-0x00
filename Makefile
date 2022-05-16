@@ -9,9 +9,7 @@ tabela.tex: main
 	./main $(BASE)
 
 doc: tabela.tex
-	tectonic main.tex 
-
-PHONY: clear
+	pdflatex main.tex 
 
 clean:
 	rm -f tabela.tex main

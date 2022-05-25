@@ -1,15 +1,369 @@
-\documentclass[a4paper]{article}
+%% abtex2-modelo-artigo.tex, v-1.9.7 laurocesar
+%% Copyright 2012-2018 by abnTeX2 group at http://www.abntex.net.br/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-artigo.tex and
+%% abntex2-modelo-references.bib
+%%
 
-\title{Tabuada}
-\author{Erik Benito}
-\date{\today}
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Artigo Acadêmico em conformidade com
+% ABNT NBR 6022:2018: Informação e documentação - Artigo em publicação 
+% periódica científica - Apresentação
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
 
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	11pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no recto. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+		
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+% ---
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% --- Informações de dados para CAPA e FOLHA DE ROSTO ---
+\titulo{Unidade de medida da Onda Sonora, Del e Decibel}
+\tituloestrangeiro{Soundwave, Del and Decibel measurement unit}
+
+\autor{Erik de Almeida Benito}
+
+\local{Brasil}
+\data{\today}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Modelo de artigo científico com abnTeX2},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{atigo científico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ---
+% Altera as margens padrões
+% ---
+\setlrmarginsandblock{3cm}{3cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
+
+
+% ----
+% Início do documento
+% ----
 \begin{document}
 
-    \maketitle
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
 
-    \section{Tabela}
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
 
-        \input{tabela.tex}
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+%---
+%
+% Se desejar escrever o artigo em duas colunas, descomente a linha abaixo
+% e a linha com o texto ``FIM DE ARTIGO EM DUAS COLUNAS''.
+% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
+%
+%---
+
+% página de titulo principal (obrigatório)
+\maketitle
+
+
+% titulo em outro idioma (opcional)
+
+
+
+% resumo em português
+\begin{resumoumacoluna}
+
+As grandes variações nos níveis de potência, voltagem, corrente e pressão sonora presentes nos sistemas de áudio e o fato de nossos sentidos se comportarem de forma aproximadamente logarítmica (nossa percepção de mudanças na intensidade do estímulo proporcional ao estímulo já presente), levam à definição de Numere as unidades para formar uma escala de nível de sinal, aplicado ao nível de potência ou elevado ao quadrado a uma quantidade proporcional à potência. A unidade foi nomeada Bell (B) em homenagem a Alexander Graham Bell (inventor do telefone, 1847-1922).
+
+ \noindent
+ \textbf{Palavras-chave}: Bel. Decibel (dB). Medidas da Onda Sonora.
+\end{resumoumacoluna}
+
+
+% resumo em inglês
+\renewcommand{\resumoname}{Abstract}
+\begin{resumoumacoluna}
+ \begin{otherlanguage*}{english}
+The large variations in power, voltage, current and sound pressure levels present in audio systems and the fact that our senses behave in an approximately logarithmic way (our perception of changes in stimulus intensity proportional to the stimulus already present), lead to the definition de Number the units to form a signal level scale, applied to the power level or squared to an amount proportional to the power. The unit was named Bell (B) in honor of Alexander Graham Bell (inventor of the telephone, 1847-1922).
+
+   \vspace{\onelineskip}
+ 
+   \noindent
+   \textbf{Keywords}: Bel.Decibel (dB). Sound Wave Measurements.
+ \end{otherlanguage*}  
+\end{resumoumacoluna}
+
+% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
+% ---
+
+\begin{center}\smaller
+\textbf{Data de submissão e aprovação}: 31 de Maio de 2022
+\end{center}
+
+\newpage 
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\section{Introdução}
+
+
+% ----------------------------------------------------------
+% Seção de explicações
+% ----------------------------------------------------------
+\subsection{Ondas Sonoras}
+As ondas sonoras são tipos de ondas mecânicas, longitudinais e tridimensionais que propagam-se com maior velocidade em meios sólidos.
+As ondas sonoras estão constantemente presentes em nosso cotidiano e podem gerar em nós, por exemplo, sensações de tranquilidade e estresse. O som é classificado como uma onda mecânica (precisa de um meio de propagação), longitudinal (possui a propagação paralela à vibração) e tridimensional (propaga-se em todas as dimensões).
+    \subsubsection{Equação fundamental das ondas:}
+        \begin{equation}
+            V_s = \lambda\cdot f
+        \end{equation}
+        Para Tal:
+            λ = comprimento da onda;
+            Vs = velocidade do som;
+            f = frequência. 
+\subsubsection{Som}
+	O som é uma onda capaz de propagar-se pelo ar e por outros meios a partir da vibração de suas moléculas. Os sons são percebidos por nós quando eles incidem sobre o nosso aparelho auditivo, que são traduzidos em estímulos elétricos e direcionados ao nosso cérebro, que os interpreta.
+Os seres humanos são capazes de ouvir uma faixa de frequências sonoras, chamada de espectro audível, que se estende entre 20 Hz e 20.000 Hz, aproximadamente. Os sons de frequências menores que 20 Hz são chamados de infrassons, enquanto os sons de frequências superiores a 20.000 Hz são chamados de ultrassons. Outros animais, tais como cães, gatos e morcegos são capazes de ouvir faixas muito mais amplas de frequências.
+A velocidade com que as ondas sonoras são propagadas depende, exclusivamente, das características do meio em que se deslocam, no ar, a velocidade do som é de aproximadamente 340 m/s.
+Como o som tem propriedades ondulatórias, ele pode sofrer diversos fenômenos, tais como a reflexão, refração, difração e também interferência. Nesse último, duas ou mais ondas sonoras podem tanto ser anuladas quanto ser somadas, de acordo com a posição em que se encontram.	
+\subsubsection{Velocidade de propagação do som}
+O som se propaga nos meios gasosos, líquidos e sólidos. Tais meios possuem propriedades físicas que facilitam ou dificultam a movimentação sonora. Ele se propagará com maior facilidade quando estiver próximo a átomos ou moléculas. A velocidade de propagação do som será maior, então, em meios sólidos. Já nos líquidos e gasosos a velocidade de propagação vai depender da temperatura do meio. A velocidade do som será de, aproximadamente, 1450 m/s na água. No ar, a velocidade será de 343m/s com temperatura de 20°C. 
+A velocidade de propagação do som é definida ao dividir a distância percorrida pelo intervalo de tempo. A fórmula utilizada é a seguinte:
+\begin{center}
+	\textbf{Velocidade em Sólido > Velocidade em Líquidos >Velocidade em Gases}\\
+    \begin{equation}
+        V_s = \frac{\Delta S}{t}
+    \end{equation}
+    Para Tal: 
+    Vs = velocidade do som;
+    ∆S = distância percorrida;
+    t = intervalo de tempo.
+\end{center}
+
+\subsubsection{Energia Sonora}
+A energia sonora é a energia produzida pelas vibrações sonoras ao viajar pelo ar, água ou qualquer outro espaço. Essas vibrações causam ondas de pressão que, do ponto de vista da física, levam a algum nível de compressão e rarefação; em outras palavras, eles amplificam, saltam e se movem enquanto viajam de sua origem para pessoas ou orelhas de animais, o que os transforma em barulho de diferentes níveis. Esse tipo de energia é uma forma de energia mecânica. Não está contida em partículas discretas e não está relacionada a nenhuma mudança química, mas sim é puramente relacionada à pressão que suas vibrações causam.
+A maioria das pessoas e dos animais podem registrar esse tipo de energia com os ouvidos e é bastante fácil de identificar, mas geralmente é muito mais difícil de aproveitar e, embora possa parecer realmente penetrante, na verdade não produz muito produção utilizável na maioria dos casos. Por esta razão, a energia relacionada ao som não é normalmente aproveitada para energia elétrica ou outras necessidades de energia humana.
+
+\subsubsection{Origem da energia Sonora}
+Qualquer coisa que produz o ruído é gerar energia sonora. Vibrações, franjas e sinos – todos estes emitem ruído produzindo ondas que carregam a tradução do som de um lugar para outro. Toda energia, som incluído, pode ser pensado como a quantidade de trabalho que pode ser executada por uma determinada força, sistema ou objeto.
+Neste contexto, o “trabalho” é simplesmente definido como a capacidade de causar alterações em um sistema; Isso pode envolver qualquer coisa, desde uma mudança de localização até uma mudança de energia de calor.
+A quantidade de trabalho que pode ser executada pelos sons comuns do dia a dia é bastante pequena, então o som não é frequentemente pensado em termos da energia bruta que contém. No entanto, existe como ondas vibratórias de som, e isso causa mudanças, mesmo que essa mudança seja pequena.
+
+\section{Intensidade sonora}
+Intensidade do som é a quantidade de energia que as ondas sonoras transferem, através de uma área, durante o intervalo de tempo de um segundo. Ela é usada para medir o fluxo de energia que é transportado por uma onda sonora. De acordo com o Sistema Internacional de Unidades, a intensidade do som é medida em unidades de W/m².
+
+\subsection{calcular a intensidade do som}
+A intensidade do som pode ser calculada se fizermos a razão da potência de uma onda sonora, ou seja, a quantidade de energia que ela emite a cada segundo, com a área cuja reta normal (uma reta que faz 90º com a superfície) é definida pela direção de propagação do som.
+Uma vez que as ondas sonoras são propagadas de maneira tridimensional, as fontes sonoras emitem sons no formato esférico, desse modo, a área pela qual as ondas sonoras transferem sua energia é proporcional a r² (r – raio da esfera) – o quadrado da distância entre o observador e a fonte emissora. Consequentemente, dizemos que a intensidade sonora é inversamente proporcional ao quadrado da distância entre o observador e a fonte emissora.
+
+\begin{equation}
+    I = \frac{\Delta E}{A\cdot\Delta t}\
+\end{equation}
+Para tal:
+I = Intensidade;
+∆E = quantidade energia;
+A = área;
+∆t = intervalo de tempo. 
+
+\subsection{Intensidade sonora e amplitude}
+A intensidade das ondas sonoras é proporcional à amplitude da onda sonora, e não à sua frequência, por isso dizemos que sons de grande intensidade são sons fortes, enquanto sons de baixa intensidade são chamados de sons fracos. Sons de grande intensidade são capazes de transferir grandes quantidades de energia a cada segundo, podendo causar danos à audição, por exemplo.
+Cuidado para não confundir as qualidades do som. Sons altos e baixos dizem respeito, respectivamente, a sons de alta frequência (sons agudos) e sons de baixa frequência (sons graves). Já os sons fracos e fortes estão relacionados com a intensidade do som, isto é, “volume alto” e “volume baixo”.
+
+
+\section{Bel e Decibel(dB)}
+Como as medidas de intensidade sonora caracterizam números muito pequenos, usamos uma medida que as relaciona com o menor som que pode ser ouvido pelos seres humanos. Essa medida é conhecida como bel. Essa medida logarítmica foi nomeada em homenagem ao inventor estadunidense Alexander Graham Bell.
+o decibel é uma unidade de medida adimensional semelhante a percentagem. O dB usa o logaritmo decimal (log10) para realizar a compressão de escala. Um exemplo típico de uso do dB é na medição do ganho/perda de potência em um sistema. Além do uso do dB como medida relativa, também existem outras aplicações na medidas de valores absolutos tais como potência e tensão entre outros (dBm, dBV, dBu). O emprego da subunidade dB é para facilitar o seu uso diário (Um decibel (dB) corresponde a um décimo de bel (B)).
+Em aplicações cotidianas, é bastante comum que utilizemos a décima parte de um bel, o decibel. O cálculo da intensidade sonora por meio da escala bel auxilia-nos na compreensão de como são os sons em diferentes intensidades sonoras, bem como os seus efeitos sobre o corpo humano.
+A escala de bels e decibels é bastante usada para comparar medidas de intensidade e energia, portanto, outras grandezas podem ser expressas de acordo com essa unidade. Um exemplo dessa utilização é a escala Richter, usada para comparar diferentes intensidades de terremotos.
+\begin{center}
+\input{intesidadeSom.tex}
+\end{center}
+\subsection{Origem}
+Em seus primeiros estudos com a acústica, Alexander Graham Bell (1847 – 1922), inventor do telefone, entre outras coisas, percebeu que a variação de som que o ouvido humano pode sentir não acompanha uma escala linear.
+Isso significa que se dobrarmos a amplitude de um sinal (duplicar sua tensão elétrica), nosso ouvido não perceberá como sendo o dobro da pressão sonora recebida, ou melhor, o dobro do volume.
+Graham Bell notou que a escala que o ouvido percebe é logaritma.
+Portanto, ao invés de utilizar a escala linear para representar a amplificação (ganho) ou a atenuação (perda) de um sistema, Graham Bell resolveu utilizar uma escala logaritma.
+Ele verificou, a princípio, que o sinal enviado por um par de fios esticados entre uma cidade e outra, sofria uma grande atenuação (diminuição na amplitude do sinal).
+Caso estas perdas não fossem corrigidas por meio de amplificadores, o sinal não chegaria inteligível na outra ponta da transmissão.
+Graham Bell criou uma unidade de medida para esta atenuação. Esta unidade era chamada originalmente de TU (transmission unit), pelo próprio Graham Bell.
+Mas em 1929, após a sua morte, os engenheiros do Bell Telephone Laboratory resolveram homenagear seu fundador, dando o nome de Bel (símbolo B) a esta unidade de medida.
+\subsection{Diferença de Bel e Decibel}
+Com a prática percebeu-se a unidade (1 Bel) era muito grande, ou seja, suas relações resultavam em valores muito elevados.
+Decidiu-se então dividir a unidade Bel em dez, ou seja, um décimo de Bel.
+Assim podemos resulmir de tal forma: 
+\begin{equation}
+    \frac{1B}{1dbB}= 1dB => 10dB = 1B
+\end{equation}
+Abaixo, seguem as fórmulas para encontrar as medidas em bel e decibel:
+\begin{equation}
+    bel = \log(\frac{Potência  comparada}{Potência referência1})
+\end{equation}
+\subsection{“Decibels” ou “Decibeis”}
+Considerando as regras da International Organization for Standardization – ISO, quando o nome da unidade homegeia uma pessoa, não se usa o plural.
+O Quadro Geral de Unidades de Medidas, do Brasil, estabelece que a forma legal do plural de decibel é decibels.
+\subsection{Vantagens}
+\begin{itemize}
+    \item É mais conveniente somar os valores em decibels em estágios sucessivos de um sistema do que multiplicar os seus fatores de multiplicação.
+    \item Faixas muito grandes de razões de valores podem ser expressas em decibels em uma faixa bastante moderada, possibilitando uma melhor visualização dos valores grandes
+    \item Na acústica o decibel usado como uma escala logarítmica da razão de intensidade sonora, se ajusta melhor a intensidade percebida pelo ouvido humano, pois o aumento do nível de intensidade em decibels corresponde aproximadamente ao aumento percebido em qualquer intensidade, fato conhecido com a Lei de potências de Stevens. Por exemplo, um humano percebe um aumento de 90 dB para 95 dB como sendo o mesmo que um aumento de 20 dB para 25 dB.
+    
+\end{itemize}
+    
+% ---
+% Conclusão
+% ---
+
+\section{Considerações finais}
+Bell (símbolo B) é uma unidade de medida para razões, usada em telecomunicações
+Eletrônica e Acústica Criada pelos Engenheiros da Bell Labs
+Conhecida como Unidade de Transmissão ou TU, foi renomeada entre 1923 e 1924
+Homenagem a Alexander Graham Bell. Não é considerada uma unidade SI, a letra d é
+minúscula, pois corresponde ao prefixo SI decidido, B é maiúscula
+Porque é uma abreviatura (e não abreviação)  para unidades Bell, derivadas do nome Alexander
+Graham Bell Como o bel é uma medida muito grande no uso diário, o decibel (dB), que é
+Correspondendo a um décimo de sino (B), que acabou se tornando a medida mais usada.\newpage
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{}
+\begin{itemize}\smaller
+    \item  Moecke, Marcos(2006) Princípios de Sistemas de Telecomunicações - Unidades de medidas logarítmicas em telecomunicações Disponivel em: 
+    \item Tuffentsammer, Karl (1956). «Das Dezilog, eine Brücke zwischen Logarithmen, Dezibel, Neper und Normzahlen» [The decilog, a bridge between logarithms, decibel, neper and preferred numbers]. VDI-Zeitschrift (em alemão). 98: 267–274
+    \item Paulin, Eugen (1 de setembro de 2007). Logarithmen, Normzahlen, Dezibel, Neper, Phon - natürlich verwandt! [Logarithms, preferred numbers, decibel, neper, phon - naturally related!] (PDF) (em alemão). [S.l.: s.n.] Consultado em 18 de dezembro de 2016. Cópia arquivada (PDF) em 18 de dezembro de 2016
+    \item Hewitt, Paul G. (2015). Física conceitual 12 ed. [S.l.]: Bookman. ISBN 9780321909107
+    \item Júnior, Joab (2020), Intensidade sonora Disponivel em: https://www.preparaenem.com/fisica/intensidade-sonora.htm
+    \item autor anônimo, O decibel e os sons (2017), Disponivel em: http://www.mat.ufrgs.br/~portosil/passa1f.html
+    \item Projeto EducaSOM, Decibéis do Bem (12 de jan de 2021), ‘MEDIDAS’ DO SOM, Disponivel em: https://decibeisdobem.com.br/blog/medidas-do-som/
+    \item autor anônimo,Portal São Francisco,Energia Sonora, Disponivel em:
+    \item https://www.portalsaofrancisco.com.br/fisica/energia-sonora
+    \item Helerbrock,Rafael, Intensidade do som, Disponivel em: https://mundoeducacao.uol.com.br/fisica/velocidade-intensidade-som.htm
+\end{itemize}
 
 \end{document}

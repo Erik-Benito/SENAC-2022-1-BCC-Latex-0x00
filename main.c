@@ -6,7 +6,7 @@ void gerar_tabuada(int);
 int main(int argc, char *argv[]) {
     int base;
 
-    if (argc == 10)
+    if (argc == 2)
         base = atoi(argv[1]);
     else 
         base = 10;
@@ -26,9 +26,9 @@ void gerar_tabuada(int base) {
     fprintf(fp,"\\begin{table}[hb] \n");
     fprintf(fp,"\\begin{tabular}{|c|c|} \n");
     fprintf(fp, "\\hline Intensidade sonora (dB) & Fonte sonora\\\\ \n");
-
+ 
     for (int i=0; i<=12; i++) {    
-                
+            
         if(i == 1){
             fprintf(fp,"\\hline \n %d & Cochicho\\\\ \n",i * base);
         }

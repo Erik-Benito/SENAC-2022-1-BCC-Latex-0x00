@@ -14,4 +14,4 @@ doc: tabela.tex
 PHONY: clear
 
 clean:
-	rm -f tabela.tex main
+	rm -f intesidadeSom.tex main
